@@ -1,0 +1,14 @@
+Package: farsfunctions
+Type: Package
+Title: Analyse the accident data in different states 
+Version: 0.1.0
+Author: Shan Yang
+Maintainer: Shan Yang <susan199316@outlook.com>
+Description: Analyse the data in different years and the causes of the accidents
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1

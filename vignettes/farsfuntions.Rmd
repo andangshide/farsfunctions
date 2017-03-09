@@ -1,0 +1,105 @@
+---
+title: "Vignette Title"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+#Introduction
+------------------------------------------------------------------------------------------------
+This is a package to deal with the data from US National Highway Traffic Safety Administration's Fatality Analysis Reporting System, it can analyse the accident datas from different states in 
+different years.
+
+#Functions
+------------------------------------------------------------------------------------------------
+##make_filename
+this function makes the year you want the standard file name for covenience after
+```{r make_filename}
+make_filename <- function(year) {
+  year <- as.integer(year)
+  sprintf("accident_%d.csv.bz2", year)}
+filename<-make_filename(2014)
+print(filename)
+```
+
+##fars_read
+this function continues the make_filename funtion to read the data according to the years and 
+make it data frame.(use the make_filename funciton first.)
+```{r fars_read}
+fars_read <- function(filename) {
+  if(!file.exists(filename))
+    stop("file '", filename, "' does not exist")
+  data <- suppressMessages({
+    readr::read_csv(filename, progress = FALSE)
+  })
+  dplyr::tbl_df(data)
+}
+filepath <- system.file("extdata", filename, package = "farsfunctions")
+accident_2014 <- fars_read(filepath)
+print(head(accident_2014))
+```
+
+##fars_read_years
+this function will arrange the data by months and years
+```{r fars_read_years}
+
+fars_read_years <- function(years) {
+        lapply(years, function(year) {
+                file <- make_filename(year)
+                tryCatch({
+                        dat <- fars_read(system.file("extdata", file, package = "farsfunctions"))
+                        dplyr::mutate(dat, year = year) %>% 
+                                dplyr::select(MONTH, year)
+                        }, error = function(e) {
+                        warning("invalid year: ", year)
+                        return(NULL)
+    })
+  })
+}
+accidents <- fars_read_years(2014)
+print(accidents)
+```
+
+##fars_summarize_years
+this function will summarize the total accidents by months and show the spread sheet.
+```{r fars_summarize_years}
+fars_summarize_years <- function(years) {
+  dat_list <- fars_read_years(years)
+  dplyr::bind_rows(dat_list) %>%
+    dplyr::group_by(year, MONTH) %>%
+    dplyr::summarize(n = n()) %>%
+    tidyr::spread(year, n)
+}
+summary <- fars_summarize_years(2013:2015)
+print(summary)
+```
+
+##fars_map_state
+this funtion will show the number of the accident in the year on the map of states
+```{r fars_map_state}
+fars_map_state <- function(state.num, year) {
+  filename <- make_filename(year)
+  data <- fars_read(system.file("extdata", file, package = "farsfunctions"))
+  state.num <- as.integer(state.num)
+
+  if(!(state.num %in% unique(data$STATE)))
+    stop("invalid STATE number: ", state.num)
+  data.sub <- dplyr::filter(data, STATE == state.num)
+  if(nrow(data.sub) == 0L) {
+    message("no accidents to plot")
+    return(invisible(NULL))
+  }
+  is.na(data.sub$LONGITUD) <- data.sub$LONGITUD > 900
+  is.na(data.sub$LATITUDE) <- data.sub$LATITUDE > 90
+  with(data.sub, {
+    maps::map("state", ylim = range(LATITUDE, na.rm = TRUE),
+              xlim = range(LONGITUD, na.rm = TRUE))
+    graphics::points(LONGITUD, LATITUDE, pch = 46)
+  })
+}
+fars_map_state(1, 2014)
+```
