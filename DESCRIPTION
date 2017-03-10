@@ -10,5 +10,11 @@ Encoding: UTF-8
 LazyData: true
 Suggests: knitr,
     rmarkdown
+Imports: 
+    dplyr,
+    readr,
+    tidyr,
+    magrittr
+Depends: maps
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
