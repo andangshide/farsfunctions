@@ -99,7 +99,6 @@ fars_summarize_years <- function(years) {
 
 #'
 #'@examples
-#'fars_map_state(1,2015)
 #'
 #'@import dplyr
 #'@import maps
