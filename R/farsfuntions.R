@@ -80,6 +80,8 @@ fars_read_years <- function(years) {
 #'@import tidyr
 #'
 #'@export
+MONTH<-NULL
+year<-NULL
 fars_summarize_years <- function(years) {
   dat_list <- fars_read_years(years)
   dplyr::bind_rows(dat_list) %>%
@@ -105,6 +107,7 @@ fars_summarize_years <- function(years) {
 #'@import graphics
 #'
 #'@export
+STATE<-NULL
 fars_map_state <- function(state.num, year) {
   filename <- make_filename(year)
   data <- fars_read(filename)
