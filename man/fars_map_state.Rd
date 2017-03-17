@@ -2,28 +2,23 @@
 % Please edit documentation in R/farsfuntions.R
 \name{fars_map_state}
 \alias{fars_map_state}
-\title{Draws the accidents on the US map}
+\title{draw the map}
 \usage{
 fars_map_state(state.num, year)
 }
 \arguments{
-\item{state.num}{A numeric or integer value of US state as defined in the FARS data.}
+\item{state.num}{the number of the state you want to draw}
 
-\item{year}{A numeric or integer value for the year of accident record.}
+\item{the}{year of the data you want to show}
 }
 \value{
-This function returns a plot with the accidents on US map. The accidents are selected
-based on the input argument \code{state.num} and \code{year}.
+a map with points
 }
 \description{
-This function creates a plot with all incidents in specific US state (defined by \code{state.num})
-per indicaed \code{year}. The \code{year} should correspond to the recorded analysis from US
-National Highway Traffic Safety Administration's Fatality Analysis Reporting System.
+draw the map by year and state number
 }
-\note{
-This function will give error if the file with indicated argument \code{year} is not
-located in the working directory. It also gives error if the \code{state.num} is non-numeric
-or non-integer value or does not correspond to any US state as defined in the FARS data.
+\details{
+show a stop \code{"invalid STATE number: state.num"} if the state number is not is the data set. show a message \code{"no accident to plot"} if there is no data for the state in that year.otherwise, a map with points in \code{year}
 }
 \examples{
 \dontrun{

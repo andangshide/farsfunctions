@@ -2,22 +2,20 @@
 % Please edit documentation in R/farsfuntions.R
 \name{fars_read}
 \alias{fars_read}
-\title{Load CSV file into a tibble}
+\title{read the data}
 \usage{
 fars_read(filename)
 }
 \arguments{
-\item{filename}{A character string giving the path and name of the CSV file}
+\item{data}{filename you want to analyse}
+
+\item{excited}{Logical value specifying whether the file exists}
 }
 \value{
-This function returns a tibble (data.frame) of the input file
+a data frame named "data" or "file \code{data} does not exist"
 }
 \description{
-This function reads CSV file defined by \code{filename}, a main argument of the function,
-and returns a tibble (data.frame).
-}
-\note{
-This function will give error if the file path is incorrect or file does not exist
+This is a funtion to read the data you need and set it as a data frame
 }
 \examples{
 \dontrun{

@@ -2,24 +2,20 @@
 % Please edit documentation in R/farsfuntions.R
 \name{fars_read_years}
 \alias{fars_read_years}
-\title{Get months and years from the respective record year}
+\title{read data for years}
 \usage{
 fars_read_years(years)
 }
 \arguments{
-\item{years}{A vector or list (numeric or integer) with the years of accident records.}
+\item{years}{datas of years that your want to read, returned by \code{\link{make_filename}}}
+
+\item{excites}{the Logical value specifying whether the file of the year exists}
 }
 \value{
-This function returns a list of tibbles (data.frames) from the respective years of
-the records. This function returns a warning and NULL if the file(s) does not exist.
+a data named "dat" or "NULL" and "invalid year: \code{years}" if the \code{years} does not exist
 }
 \description{
-This function accepts a vector or list of years \code{years}, where the records from US
-National Highway Traffic Safety Administration's Fatality Analysis Reporting System should
-be available. It returns a list of the data.frames with two columns (MONTH, year).
-}
-\note{
-This function will give error if the files are not located in the working directory.
+read the data for specific years and save the data to "dat"
 }
 \examples{
 \dontrun{

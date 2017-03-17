@@ -2,28 +2,22 @@
 % Please edit documentation in R/farsfuntions.R
 \name{fars_summarize_years}
 \alias{fars_summarize_years}
-\title{Calculate a number of accidents per month and year}
+\title{summarize the data of the year}
 \usage{
 fars_summarize_years(years)
 }
 \arguments{
-\item{years}{A vector or list (numeric or integer) with the years of accident records.}
+\item{years}{the data of the year you want to summarize,returned by \code{\link{fars_read_years}}}
 }
 \value{
-This function returns a tibble (data.frame) with number of accidents per month and year
-from the indicated years of records.
+a data named "dat_list" and a spread sheet
 }
 \description{
-This function accepts a vector or list of years \code{years}, where the records from US
-National Highway Traffic Safety Administration's Fatality Analysis Reporting System should
-be available. It calculates a number of accidents per month and year and returns a tibble
-(data.frame) with months in rows and years in columns.
-}
-\note{
-This function will give error if the files are not located in the working directory or
-if the input \code{year} is non-numeric or non-integer.
+summarize number of the data of the year by year and month and make the spread sheet
 }
 \examples{
+fars_summarize_years(2014,2015)
+
 \dontrun{
 fars_summarize_years(2013)
 fars_summarize_years(2013:2015)

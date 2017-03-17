@@ -1,16 +1,14 @@
-#' Load CSV file into a tibble
+#'read the data
 #'
-#' This function reads CSV file defined by \code{filename}, a main argument of the function,
-#' and returns a tibble (data.frame).
+#'This is a funtion to read the data you need and set it as a data frame
 #'
-#' @param filename A character string giving the path and name of the CSV file
+#'@param data filename you want to analyse
+#'@param excited Logical value specifying whether the file exists
 #'
-#' @return This function returns a tibble (data.frame) of the input file
+#'@return a data frame named "data" or "file \code{data} does not exist"
 #'
-#' @note This function will give error if the file path is incorrect or file does not exist
-#'
-#' @importFrom readr read_csv
-#' @importFrom dplyr tbl_df
+#'@import readr
+#'@import dplyr
 #'
 #' @examples
 #' \dontrun{
@@ -28,18 +26,14 @@ fars_read <- function(filename) {
   dplyr::tbl_df(data)
 }
 
-#' Create a filename by the year of interest
+#'mark the file by years
 #'
-#' This function created a filename as accident_<YEAR>.csv.bz2, where <YEAR> is substituted
-#' by the function input \code{year}.
+#'mark the file by different years
 #'
-#' @param year A numeric value of the year. It should correspond to the available yearly records
-#' from US National Highway Traffic Safety Administration's Fatality Analysis Reporting System.
+#'@param year the year that you want to mark out
 #'
-#' @return This function returns a character sting of the filename as accident_<YEAR>.csv.bz2,
-#' where <YEAR> is substituted by the input argument.
+#'@return the file named by the year you specified
 #'
-#' @note This function will give error if the input \code{year} is non-numeric or non-integer.
 #'
 #' @examples
 #' \dontrun{
@@ -52,20 +46,16 @@ make_filename <- function(year) {
   sprintf("accident_%d.csv.bz2", year)
 }
 
-#' Get months and years from the respective record year
+#'read data for years
 #'
-#' This function accepts a vector or list of years \code{years}, where the records from US
-#' National Highway Traffic Safety Administration's Fatality Analysis Reporting System should
-#' be available. It returns a list of the data.frames with two columns (MONTH, year).
+#'read the data for specific years and save the data to "dat"
 #'
-#' @param years A vector or list (numeric or integer) with the years of accident records.
+#'@param years datas of years that your want to read, returned by \code{\link{make_filename}}
+#'@param excites the Logical value specifying whether the file of the year exists
 #'
-#' @return This function returns a list of tibbles (data.frames) from the respective years of
-#' the records. This function returns a warning and NULL if the file(s) does not exist.
+#'@return a data named "dat" or "NULL" and "invalid year: \code{years}" if the \code{years} does not exist
 #'
-#' @note This function will give error if the files are not located in the working directory.
-#'
-#' @importFrom dplyr mutate select
+#'@import dplyr
 #'
 #' @examples
 #' \dontrun{
@@ -89,24 +79,19 @@ fars_read_years <- function(years) {
   })
 }
 
-#' Calculate a number of accidents per month and year
+#'summarize the data of the year
 #'
-#' This function accepts a vector or list of years \code{years}, where the records from US
-#' National Highway Traffic Safety Administration's Fatality Analysis Reporting System should
-#' be available. It calculates a number of accidents per month and year and returns a tibble
-#' (data.frame) with months in rows and years in columns.
+#'summarize number of the data of the year by year and month and make the spread sheet
 #'
-#' @param years A vector or list (numeric or integer) with the years of accident records.
+#'@param years the data of the year you want to summarize,returned by \code{\link{fars_read_years}}
 #'
-#' @return This function returns a tibble (data.frame) with number of accidents per month and year
-#' from the indicated years of records.
+#'@return a data named "dat_list" and a spread sheet
 #'
-#' @note This function will give error if the files are not located in the working directory or
-#' if the input \code{year} is non-numeric or non-integer.
+#'@examples
+#'fars_summarize_years(2014,2015)
 #'
-#' @importFrom dplyr bind_rows group_by summarize
-#' @importFrom tidyr spread
-#' @import magrittr
+#'@import dplyr
+#'@import tidyr
 #'
 #' @examples
 #' \dontrun{
@@ -123,25 +108,19 @@ fars_summarize_years <- function(years) {
     tidyr::spread(year, n)
 }
 
-#' Draws the accidents on the US map
+#'draw the map
 #'
-#' This function creates a plot with all incidents in specific US state (defined by \code{state.num})
-#' per indicaed \code{year}. The \code{year} should correspond to the recorded analysis from US
-#' National Highway Traffic Safety Administration's Fatality Analysis Reporting System.
+#'draw the map by year and state number
 #'
-#' @param state.num A numeric or integer value of US state as defined in the FARS data.
-#' @param year A numeric or integer value for the year of accident record.
+#'@param state.num the number of the state you want to draw
+#'@param the year of the data you want to show
 #'
-#' @return This function returns a plot with the accidents on US map. The accidents are selected
-#' based on the input argument \code{state.num} and \code{year}.
+#'@return a map with points
+#'@details show a stop \code{"invalid STATE number: state.num"} if the state number is not is the data set. show a message \code{"no accident to plot"} if there is no data for the state in that year.otherwise, a map with points in \code{year}
 #'
-#' @note This function will give error if the file with indicated argument \code{year} is not
-#' located in the working directory. It also gives error if the \code{state.num} is non-numeric
-#' or non-integer value or does not correspond to any US state as defined in the FARS data.
-#'
-#' @importFrom dplyr filter
-#' @importFrom maps map
-#' @importFrom graphics points
+#'@import dplyr
+#'@import maps
+#'@import graphics
 #'
 #' @examples
 #' \dontrun{
