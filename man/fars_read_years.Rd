@@ -22,7 +22,9 @@ be available. It returns a list of the data.frames with two columns (MONTH, year
 This function will give error if the files are not located in the working directory.
 }
 \examples{
+\dontrun{
 fars_read_years(2013)
 fars_read_years(2013:2015)
+}
 
 }

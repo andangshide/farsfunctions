@@ -24,7 +24,9 @@ This function will give error if the files are not located in the working direct
 if the input \code{year} is non-numeric or non-integer.
 }
 \examples{
+\dontrun{
 fars_summarize_years(2013)
 fars_summarize_years(2013:2015)
+}
 
 }

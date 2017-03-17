@@ -26,6 +26,8 @@ located in the working directory. It also gives error if the \code{state.num} is
 or non-integer value or does not correspond to any US state as defined in the FARS data.
 }
 \examples{
+\dontrun{
 fars_map_state(1, 2013)
+}
 
 }

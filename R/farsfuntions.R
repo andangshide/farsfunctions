@@ -13,8 +13,10 @@
 #' @importFrom dplyr tbl_df
 #'
 #' @examples
+#' \dontrun{
 #' fars_read(system.file("data", "accident_2013.csv.bz2", package = "fars"))
 #' accident_2014 <- fars_read(system.file("data", "accident_2014.csv.bz2", package = "fars"))
+#'}
 #'
 #' @export
 fars_read <- function(filename) {
@@ -40,7 +42,9 @@ fars_read <- function(filename) {
 #' @note This function will give error if the input \code{year} is non-numeric or non-integer.
 #'
 #' @examples
+#' \dontrun{
 #' make_filename(2013)
+#'}
 #'
 #' @export
 make_filename <- function(year) {
@@ -64,8 +68,10 @@ make_filename <- function(year) {
 #' @importFrom dplyr mutate select
 #'
 #' @examples
+#' \dontrun{
 #' fars_read_years(2013)
 #' fars_read_years(2013:2015)
+#'}
 #'
 #' @export
 fars_read_years <- function(years) {
@@ -103,8 +109,10 @@ fars_read_years <- function(years) {
 #' @import magrittr
 #'
 #' @examples
+#' \dontrun{
 #' fars_summarize_years(2013)
 #' fars_summarize_years(2013:2015)
+#'}
 #'
 #' @export
 fars_summarize_years <- function(years) {
@@ -136,7 +144,9 @@ fars_summarize_years <- function(years) {
 #' @importFrom graphics points
 #'
 #' @examples
+#' \dontrun{
 #' fars_map_state(1, 2013)
+#'}
 #'
 #' @export
 fars_map_state <- function(state.num, year) {

@@ -20,7 +20,9 @@ and returns a tibble (data.frame).
 This function will give error if the file path is incorrect or file does not exist
 }
 \examples{
+\dontrun{
 fars_read(system.file("data", "accident_2013.csv.bz2", package = "fars"))
 accident_2014 <- fars_read(system.file("data", "accident_2014.csv.bz2", package = "fars"))
+}
 
 }
