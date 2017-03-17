@@ -42,8 +42,8 @@ fars_read <- function(filename) {
 #' @examples
 #' \dontrun{
 #' make_filename(2013)
-#'}
-#'
+#' }
+#' 
 #' @export
 make_filename <- function(year) {
   year <- as.integer(year)
@@ -69,8 +69,8 @@ make_filename <- function(year) {
 #' \dontrun{
 #' fars_read_years(2013)
 #' fars_read_years(2013:2015)
-#'}
-#'
+#' }
+#' 
 #' @export
 fars_read_years <- function(years) {
   lapply(years, function(year) {
@@ -110,8 +110,8 @@ fars_read_years <- function(years) {
 #' \dontrun{
 #' fars_summarize_years(2013)
 #' fars_summarize_years(2013:2015)
-#'}
-#'
+#' }
+#' 
 #' @export
 fars_summarize_years <- function(years) {
   dat_list <- fars_read_years(years)
@@ -144,8 +144,7 @@ fars_summarize_years <- function(years) {
 #' @examples
 #' \dontrun{
 #' fars_map_state(1, 2013)
-#'}
-#'
+#' }
 #' @export
 fars_map_state <- function(state.num, year) {
   filename <- system.file("data", make_filename(year), package = "fars")

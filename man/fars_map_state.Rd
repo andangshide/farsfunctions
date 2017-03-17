@@ -29,5 +29,4 @@ or non-integer value or does not correspond to any US state as defined in the FA
 \dontrun{
 fars_map_state(1, 2013)
 }
-
 }
