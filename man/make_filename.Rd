@@ -2,21 +2,27 @@
 % Please edit documentation in R/farsfuntions.R
 \name{make_filename}
 \alias{make_filename}
-\title{mark the file by years}
+\title{Create a filename by the year of interest}
 \usage{
 make_filename(year)
 }
 \arguments{
-\item{year}{the year that you want to mark out}
+\item{year}{A numeric value of the year. It should correspond to the available yearly records
+from US National Highway Traffic Safety Administration's Fatality Analysis Reporting System.}
 }
 \value{
-the file named by the year you specified
+This function returns a character sting of the filename as accident_<YEAR>.csv.bz2,
+where <YEAR> is substituted by the input argument.
 }
 \description{
-mark the file by different years
+This function created a filename as accident_<YEAR>.csv.bz2, where <YEAR> is substituted
+by the function input \code{year}.
+}
+\note{
+This function will give error if the input \code{year} is non-numeric or non-integer.
 }
 \examples{
-\dontrun{
+/dontrun{
 make_filename(2013)
 }
 
