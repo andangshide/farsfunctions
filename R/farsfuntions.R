@@ -1,11 +1,13 @@
-#' read the data
+#' Load CSV file into a tibble
 #'
-#' This is a funtion to read the data you need and set it as a data frame
+#' This function reads CSV file defined by \code{filename}, a main argument of the function,
+#' and returns a tibble (data.frame).
 #'
-#' @param data filename you want to analyse
-#' @param excited Logical value specifying whether the file exists
+#' @param filename A character string giving the path and name of the CSV file
 #'
-#' @return a data frame named "data" or "file \code{data} does not exist"
+#' @return This function returns a tibble (data.frame) of the input file
+#'
+#' @note This function will give error if the file path is incorrect or file does not exist
 #'
 #' @importFrom readr read_csv
 #' @importFrom dplyr tbl_df
@@ -14,8 +16,8 @@
 #' \dontrun{
 #' fars_read(system.file("data", "accident_2013.csv.bz2", package = "fars"))
 #' accident_2014 <- fars_read(system.file("data", "accident_2014.csv.bz2", package = "fars"))
-#'}
-#'
+#' }
+#' 
 #' @export
 fars_read <- function(filename) {
   if(!file.exists(filename))
@@ -145,6 +147,7 @@ fars_summarize_years <- function(years) {
 #' \dontrun{
 #' fars_map_state(1, 2013)
 #' }
+#' 
 #' @export
 fars_map_state <- function(state.num, year) {
   filename <- system.file("data", make_filename(year), package = "fars")
