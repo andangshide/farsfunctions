@@ -22,7 +22,7 @@ by the function input \code{year}.
 This function will give error if the input \code{year} is non-numeric or non-integer.
 }
 \examples{
-/dontrun{
+\dontrun{
 make_filename(2013)
 }
 
